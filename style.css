@@ -1,0 +1,84 @@
+/* Genel Stil Ayarları */
+body {
+    font-family: 'Arial', sans-serif; /* Genel font tipi */
+    color: #333; /* Genel metin rengi */
+}
+
+/* Navigasyon Bar Stillemesi */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1); /* Hafif bir gölge */
+}
+
+/* Genel galeri stillemeleri */
+#gallery {
+    margin-top: 20px;
+}
+
+/* Bootstrap kartlarını ve resimleri stilleyelim */
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1); /* Kartlara gölge ekle */
+    transition: box-shadow .3s ease; /* Gölge geçiş efekti */
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,.3); /* Kartın üzerine gelindiğinde gölgeyi artır */
+}
+
+.card-img-top {
+    height: 200px; /* Resim yüksekliğini sabitleyelim */
+    object-fit: cover; /* Resimleri kırpma modunda gösterelim */
+}
+
+/* Yükleniyor işareti için stillemeler */
+#loading {
+    padding: 40px 0;
+}
+
+/* Hata mesajı için stillemeler */
+#error-message {
+    padding: 20px 0;
+}
+
+/* Resimlerin üzerine gelindiğinde güzel bir efekt */
+.image-container:hover .image-overlay {
+    opacity: 1;
+}
+
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Yarı saydam siyah arka plan */
+    color: #f1f1f1; /* Beyaz metin rengi */
+    width: 100%;
+    transition: .5s ease;
+    opacity: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Resim başlığı ve yazar bilgisi için stillemeler */
+.image-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.image-author {
+    font-size: 16px;
+}
+
+/* Footer Stillemesi */
+footer {
+    background-color: #f8f9fa; /* Açık gri arka plan */
+    color: #333; /* Metin rengi */
+    padding: 20px 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Küçük ekranlar için responsive düzenlemeler */
+@media (max-width: 576px) {
+    .card-img-top {
+        height: 150px;
+    }
+}
