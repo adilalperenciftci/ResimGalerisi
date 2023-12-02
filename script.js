@@ -1,5 +1,5 @@
 function getUnsplashImages() {
-    const clientId = 'api buraya yazılmalı'; // Unsplash API anahtarı
+    const clientId = 'api buraya yazılmalı'; // Unsplash API anahtarı gerekli
     let url = `https://api.unsplash.com/photos/random?client_id=${clientId}&count=12`;
 
     $.ajax({
