@@ -1,0 +1,58 @@
+function getUnsplashImages() {
+    const clientId = 'api buraya yazılmalı'; // Unsplash API anahtarı
+    let url = `https://api.unsplash.com/photos/random?client_id=${clientId}&count=12`;
+
+    $.ajax({
+        url: url,
+        method: "GET",
+        success: function(data) {
+            $('#loading').hide(); // Yükleniyor işaretini gizledim
+            data.forEach((image, index) => {
+                let imageUrl = image.urls.small;
+                let imageAuthor = image.user.name;
+                let imageDescription = image.description || image.alt_description || 'Unsplash Photo';
+                let shortDescription = imageDescription.length > 100 ? imageDescription.substring(0, 100) + '...' : imageDescription; // Açıklamayı kısalttım
+
+                let imageElement = `
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="card">
+                        <img src="${imageUrl}" class="card-img-top" alt="${imageDescription}" data-toggle="modal" data-target="#imageModal-${index}">
+                        <div class="card-body">
+                            <h5 class="card-title">${shortDescription}</h5>
+                            <p class="card-text">Fotoğraf: ${imageAuthor}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="imageModal-${index}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel-${index}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="imageModalLabel-${index}">${imageDescription}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="${image.urls.regular}" class="img-fluid" alt="${imageDescription}">
+                            </div>
+                            <div class="modal-footer">
+                                <p>Fotoğraf: ${imageAuthor}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+                $("#gallery").append(imageElement);
+            });
+        },
+        error: function(error) {
+            $('#loading').hide(); // Yükleniyor işaretini gizledim
+            $('#error-message').text("Resimler yüklenirken bir hata oluştu: " + error.statusText).show(); // Hata mesajını gösterdim
+        }
+    });
+}
+
+$(document).ready(function() {
+    getUnsplashImages();
+});
