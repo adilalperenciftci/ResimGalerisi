@@ -1,20 +1,20 @@
-/* Genel Stil Ayarları */
+/* Genel Stil Ayarlarım */
 body {
     font-family: 'Arial', sans-serif; /* Genel font tipi */
     color: #333; /* Genel metin rengi */
 }
 
-/* Navigasyon Bar Stillemesi */
+/* Navigasyon Bar Stillemem*/
 .navbar {
     box-shadow: 0 2px 4px rgba(0,0,0,.1); /* Hafif bir gölge */
 }
 
-/* Genel galeri stillemeleri */
+/* Genel galeri stillemelerim */
 #gallery {
     margin-top: 20px;
 }
 
-/* Bootstrap kartlarını ve resimleri stilleyelim */
+/* Bootstrap kartlarını ve resimleri stilledim */
 .card {
     margin-bottom: 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,.1); /* Kartlara gölge ekle */
@@ -22,25 +22,25 @@ body {
 }
 
 .card:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,.3); /* Kartın üzerine gelindiğinde gölgeyi artır */
+    box-shadow: 0 4px 8px rgba(0,0,0,.3); /* Kartın üzerine gelindiğinde gölgeyi artırdım */
 }
 
 .card-img-top {
-    height: 200px; /* Resim yüksekliğini sabitleyelim */
-    object-fit: cover; /* Resimleri kırpma modunda gösterelim */
+    height: 200px; /* Resim yüksekliğini sabitledim */
+    object-fit: cover; /* Resimleri kırpma modunda gösterdim */
 }
 
-/* Yükleniyor işareti için stillemeler */
+/* Yükleniyor işareti için stilleme yaptım */
 #loading {
     padding: 40px 0;
 }
 
-/* Hata mesajı için stillemeler */
+/* Hata mesajı için stilleme */
 #error-message {
     padding: 20px 0;
 }
 
-/* Resimlerin üzerine gelindiğinde güzel bir efekt */
+/* Resimlerin üzerine gelindiğinde güzel bir efekt için */
 .image-container:hover .image-overlay {
     opacity: 1;
 }
@@ -57,7 +57,7 @@ body {
     text-align: center;
 }
 
-/* Resim başlığı ve yazar bilgisi için stillemeler */
+/* Resim başlığı ve yazar bilgisi için stillemem*/
 .image-title {
     font-size: 20px;
     font-weight: bold;
@@ -67,7 +67,7 @@ body {
     font-size: 16px;
 }
 
-/* Footer Stillemesi */
+/* Footer Stillemem */
 footer {
     background-color: #f8f9fa; /* Açık gri arka plan */
     color: #333; /* Metin rengi */
@@ -76,7 +76,7 @@ footer {
     font-size: 14px;
 }
 
-/* Küçük ekranlar için responsive düzenlemeler */
+/* Küçük ekranlar için responsive düzenlemem */
 @media (max-width: 576px) {
     .card-img-top {
         height: 150px;
