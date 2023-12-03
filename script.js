@@ -1,5 +1,5 @@
 function getUnsplashImages() {
-    const clientId = ''0pfAt6LFbYIG-4Jbp-3B2R_J-IAhhgVdEP_j0QaweFg'; // Unsplash API
+   const clientId = '0pfAt6LFbYIG-4Jbp-3B2R_J-IAhhgVdEP_j0QaweFg';
     let url = `https://api.unsplash.com/photos/random?client_id=${clientId}&count=12`;
 
     $.ajax({
