@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resim Galerisi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigasyon Barı -->
+    <!-- Navigasyon Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Resim Galerisi</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,19 +20,26 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Ana Sayfa <span class="sr-only">(current)</span></a>
                 </li>
+                <!-- Daha fazla navigasyon öğesi eklenebilir -->
             </ul>
         </div>
     </nav>
 
     <div class="container mt-5">
         <h2 class="text-center mb-4">Resim Galerisi</h2>
+        <!-- Filtreleme Düğmeleri -->
+        <div class="text-center mb-4">
+            <button class="btn btn-primary filter-button" data-filter="all">Tümü</button>
+            <button class="btn btn-secondary filter-button" data-filter="kategori1">Kategori 1</button>
+            <button class="btn btn-success filter-button" data-filter="kategori2">Kategori 2</button>
+        </div>
         <div id="loading" class="text-center">
             <div class="spinner-border text-primary" role="status">
                 <span class="sr-only">Yükleniyor...</span>
             </div>
         </div>
-        <div class="row" id="gallery">
-            <!-- Resimler burada gözükecek -->
+        <div class="row" id="gallery">           
+            <!-- Resimler burada gösterilecek -->
         </div>
         <div id="error-message" class="text-center text-danger mt-3" style="display: none;">
             Resimler yüklenirken bir hata oluştu.
@@ -42,10 +50,34 @@
     <footer class="footer bg-light mt-5">
         <div class="container text-center py-3">
             <span>&copy; 2023 Resim Galerisi. Tüm Hakları Saklıdır.</span>
+            <div class="row">
+                <div class="col-md-12">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">İsim</label>
+                            <input type="text" class="form-control" id="name" placeholder="İsminizi girin">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email adresi</label>
+                            <input type="email" class="form-control" id="email" placeholder="Email adresinizi girin">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mesajınız</label>
+                            <textarea class="form-control" id="message" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Gönder</button>
+                    </form>
+                </div>
+            </div>
+            
         </div>
+        <div class="social-links">
+            <a href="https://twitter.com/senin_twitter" class="twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://facebook.com/senin_facebook" class="facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://instagram.com/senin_instagram" class="instagram"><i class="fab fa-instagram"></i></a>
+        </div>              
     </footer>
-
-    <!-- jQuery'nin tam versiyonunu kullandım -->
+    <!-- jQuery'nin tam versiyonunu kullan -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
