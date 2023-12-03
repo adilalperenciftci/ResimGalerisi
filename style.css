@@ -1,51 +1,44 @@
-/* Genel Stil Ayarları */
 body {
-    font-family: 'Arial', sans-serif; /* Genel font tipi */
-    color: #333; /* Genel metin rengi */
+    font-family: 'Arial', sans-serif; 
+    color: #333; 
 }
-
-/* Navigasyon Bar Stillemesi */
 .navbar {
-    box-shadow: 0 2px 4px rgba(0,0,0,.1); /* Hafif bir gölge */
+    box-shadow: 0 2px 4px rgba(0,0,0,.1); 
 }
-
-/* Genel galeri stillemeleri */
 #gallery {
     margin-top: 20px;
 }
-
-/* Bootstrap kartlarını ve resimleri stilleyelim */
 .card {
     margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,.1); /* Kartlara gölge ekle */
-    transition: box-shadow .3s ease; /* Gölge geçiş efekti */
+    box-shadow: 0 2px 4px rgba(0,0,0,.1); 
+    transition: box-shadow .3s ease; 
 }
 
 .card:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,.3); /* Kartın üzerine gelindiğinde gölgeyi artır */
+    box-shadow: 0 4px 8px rgba(0,0,0,.3);
 }
 
 .card-img-top {
-    height: 200px; /* Resim yüksekliğini sabitleyelim */
-    object-fit: cover; /* Resimleri kırpma modunda gösterelim */
-    transition: transform 0.5s ease; /* Resim üzerine gelindiğinde büyütme efekti */
+    height: 200px; 
+    object-fit: cover; 
+    transition: transform 0.5s ease;
 }
 
 .card-img-top:hover {
-    transform: scale(1.1); /* Resim üzerine gelindiğinde büyüt */
+    transform: scale(1.1); 
 }
 
-/* Yükleniyor işareti için stillemeler */
+
 #loading {
     padding: 40px 0;
 }
 
-/* Hata mesajı için stillemeler */
+
 #error-message {
     padding: 20px 0;
 }
 
-/* Resimlerin üzerine gelindiğinde güzel bir efekt */
+
 .image-container:hover .image-overlay {
     opacity: 1;
 }
@@ -53,8 +46,8 @@ body {
 .image-overlay {
     position: absolute;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Yarı saydam siyah arka plan */
-    color: #f1f1f1; /* Beyaz metin rengi */
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1; 
     width: 100%;
     transition: .5s ease;
     opacity: 0;
@@ -62,7 +55,7 @@ body {
     text-align: center;
 }
 
-/* Resim başlığı ve yazar bilgisi için stillemeler */
+
 .image-title {
     font-size: 20px;
     font-weight: bold;
@@ -72,7 +65,7 @@ body {
     font-size: 16px;
 }
 
-/* Footer Stillemesi */
+
 footer {
     background-color: #f8f9fa; /* Açık gri arka plan */
     color: #333; /* Metin rengi */
@@ -81,17 +74,17 @@ footer {
     font-size: 14px;
 }
 
-/* Küçük ekranlar için responsive düzenlemeler */
+
 @media (max-width: 576px) {
     .card-img-top {
         height: 150px;
     }
 }
-/* Renk ve Font Ayarlamaları */
+
 :root {
-    --primary-color: #007bff; /* Ana renk */
-    --secondary-color: #6c757d; /* İkincil renk */
-    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Genel font ailesi */
+    --primary-color: #007bff; 
+    --secondary-color: #6c757d; 
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -99,7 +92,7 @@ body {
     color: var(--secondary-color);
 }
 
-/* Düğme Stillemeleri */
+
 .btn {
     box-shadow: 0 2px 4px rgba(0,0,0,.2);
     transition: all .2s ease;
@@ -110,19 +103,18 @@ body {
     transform: translateY(-2px);
 }
 
-/* Kart Hover Efektleri */
+
 .card:hover .card-img-top {
     transform: scale(1.03);
 }
 
-/* Responsive Tasarım İyileştirmeleri */
+
 @media (max-width: 768px) {
     .card-img-top {
         height: auto;
     }
 }
 
-/* Footer Stillemesi Güncellemesi */
 footer {
     background-color: var(--primary-color);
     color: white;
