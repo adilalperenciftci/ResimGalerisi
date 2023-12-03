@@ -1,17 +1,14 @@
-// script.js
-
 function getUnsplashImages() {
-    const clientId = '0pfAt6LFbYIG-4Jbp-3B2R_J-IAhhgVdEP_j0QaweFg'; // Unsplash API anahtarın
+    const clientId = 'api key buraya girilmeli'; // Unsplash API
     let url = `https://api.unsplash.com/photos/random?client_id=${clientId}&count=12`;
 
     $.ajax({
         url: url,
         method: "GET",
         success: function(data) {
-            $('#loading').hide(); // Yükleniyor işaretini gizle
+            $('#loading').hide(); 
             data.forEach((image, index) => {
-                // Örnek olarak rastgele kategori atama
-                let categoryClass = 'kategori' + (index % 3 + 1); // 'kategori1', 'kategori2', veya 'kategori3'
+                let categoryClass = 'kategori' + (index % 3 + 1); 
 
                 let imageUrl = image.urls.small;
                 let imageAuthor = image.user.name;
@@ -52,16 +49,14 @@ function getUnsplashImages() {
             });
         },
         error: function(error) {
-            $('#loading').hide(); // Yükleniyor işaretini gizle
-            $('#error-message').text("Resimler yüklenirken bir hata oluştu: " + error.statusText).show(); // Hata mesajını göster
+            $('#loading').hide(); 
+            $('#error-message').text("Resimler yüklenirken bir hata oluştu: " + error.statusText).show(); 
         }
     });
 }
 
 $(document).ready(function() {
     getUnsplashImages();
-
-    // Galeriye filtreleme özelliği ekleme
     $(".filter-button").click(function() {
         var value = $(this).attr('data-filter');
         
