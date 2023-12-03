@@ -1,20 +1,25 @@
+// script.js
+
 function getUnsplashImages() {
-    const clientId = 'api buraya yazılmalı'; // Unsplash API anahtarı gerekli
+    const clientId = '0pfAt6LFbYIG-4Jbp-3B2R_J-IAhhgVdEP_j0QaweFg'; // Unsplash API anahtarın
     let url = `https://api.unsplash.com/photos/random?client_id=${clientId}&count=12`;
 
     $.ajax({
         url: url,
         method: "GET",
         success: function(data) {
-            $('#loading').hide(); // Yükleniyor işaretini gizledim
+            $('#loading').hide(); // Yükleniyor işaretini gizle
             data.forEach((image, index) => {
+                // Örnek olarak rastgele kategori atama
+                let categoryClass = 'kategori' + (index % 3 + 1); // 'kategori1', 'kategori2', veya 'kategori3'
+
                 let imageUrl = image.urls.small;
                 let imageAuthor = image.user.name;
                 let imageDescription = image.description || image.alt_description || 'Unsplash Photo';
-                let shortDescription = imageDescription.length > 100 ? imageDescription.substring(0, 100) + '...' : imageDescription; // Açıklamayı kısalttım
+                let shortDescription = imageDescription.length > 100 ? imageDescription.substring(0, 100) + '...' : imageDescription;
 
                 let imageElement = `
-                <div class="col-md-4 col-sm-6 mb-3">
+                <div class="col-md-4 col-sm-6 mb-3 filter ${categoryClass}">
                     <div class="card">
                         <img src="${imageUrl}" class="card-img-top" alt="${imageDescription}" data-toggle="modal" data-target="#imageModal-${index}">
                         <div class="card-body">
@@ -47,12 +52,24 @@ function getUnsplashImages() {
             });
         },
         error: function(error) {
-            $('#loading').hide(); // Yükleniyor işaretini gizledim
-            $('#error-message').text("Resimler yüklenirken bir hata oluştu: " + error.statusText).show(); // Hata mesajını gösterdim
+            $('#loading').hide(); // Yükleniyor işaretini gizle
+            $('#error-message').text("Resimler yüklenirken bir hata oluştu: " + error.statusText).show(); // Hata mesajını göster
         }
     });
 }
 
 $(document).ready(function() {
     getUnsplashImages();
+
+    // Galeriye filtreleme özelliği ekleme
+    $(".filter-button").click(function() {
+        var value = $(this).attr('data-filter');
+        
+        if(value == "all") {
+            $('.filter').show('1000');
+        } else {
+            $(".filter").hide('3000');
+            $('.filter').filter('.' + value).show('3000');
+        }
+    });
 });
