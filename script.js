@@ -1,70 +1,107 @@
 function getUnsplashImages() {
-   const clientId = '0pfAt6LFbYIG-4Jbp-3B2R_J-IAhhgVdEP_j0QaweFg';
-    let url = `https://api.unsplash.com/photos/random?client_id=${clientId}&count=12`;
+    const clientId = '0pfAt6LFbYIG-4Jbp-3B2R_J-IAhhgVdEP_j0QaweFg';
+    let url = `https://api.unsplash.com/photos/random?client_id=${clientId}&count=21`;
 
     $.ajax({
         url: url,
         method: "GET",
-        success: function(data) {
-            $('#loading').hide(); 
-            data.forEach((image, index) => {
-                let categoryClass = 'kategori' + (index % 3 + 1); 
-
-                let imageUrl = image.urls.small;
-                let imageAuthor = image.user.name;
-                let imageDescription = image.description || image.alt_description || 'Unsplash Photo';
-                let shortDescription = imageDescription.length > 100 ? imageDescription.substring(0, 100) + '...' : imageDescription;
-
-                let imageElement = `
-                <div class="col-md-4 col-sm-6 mb-3 filter ${categoryClass}">
-                    <div class="card">
-                        <img src="${imageUrl}" class="card-img-top" alt="${imageDescription}" data-toggle="modal" data-target="#imageModal-${index}">
-                        <div class="card-body">
-                            <h5 class="card-title">${shortDescription}</h5>
-                            <p class="card-text">Fotoğraf: ${imageAuthor}</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal -->
-                <div class="modal fade" id="imageModal-${index}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel-${index}" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="imageModalLabel-${index}">${imageDescription}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <img src="${image.urls.regular}" class="img-fluid" alt="${imageDescription}">
-                            </div>
-                            <div class="modal-footer">
-                                <p>Fotoğraf: ${imageAuthor}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                `;
-                $("#gallery").append(imageElement);
-            });
+        beforeSend: () => $('#loading').html('<div class="spinner-border text-primary" role="status"><span class="sr-only">Yükleniyor...</span></div>').show(),
+        complete: () => $('#loading').hide(),
+        success: (data) => {
+            displayImages(data);
         },
-        error: function(error) {
-            $('#loading').hide(); 
-            $('#error-message').text("Resimler yüklenirken bir hata oluştu: " + error.statusText).show(); 
-        }
+        error: (error) => $('#error-message').text("Resimler yüklenirken bir hata oluştu: " + error.statusText).show()
     });
 }
 
-$(document).ready(function() {
+function searchUnsplashImages(searchTerm) {
+    const clientId = '0pfAt6LFbYIG-4Jbp-3B2R_J-IAhhgVdEP_j0QaweFg'; // Burada kendi Unsplash API anahtarını kullan
+    let url = `https://api.unsplash.com/search/photos?query=${searchTerm}&client_id=${clientId}`;
+
+    $.ajax({
+        url: url,
+        method: "GET",
+        beforeSend: () => $('#loading').show(),
+        complete: () => $('#loading').hide(),
+        success: (data) => {
+            displayImages(data.results); // Arama sonuçlarını göster
+        },
+        error: (error) => $('#error-message').text("Arama sırasında bir hata oluştu: " + error.statusText).show()
+    });
+}
+
+function searchImagesByCategory(category) {
+    const clientId = '0pfAt6LFbYIG-4Jbp-3B2R_J-IAhhgVdEP_j0QaweFg'; // Unsplash API anahtarınız
+    let url = category ?
+        `https://api.unsplash.com/search/photos?query=${category}&client_id=${clientId}` :
+        `https://api.unsplash.com/photos/random?client_id=${clientId}&count=21`;
+
+    $.ajax({
+        url: url,
+        method: "GET",
+        beforeSend: () => $('#loading').show(),
+        complete: () => $('#loading').hide(),
+        success: (data) => {
+            let images = category ? data.results : data;
+            displayImages(images);
+        },
+        error: (error) => $('#error-message').text("Resimler yüklenirken bir hata oluştu: " + error.statusText).show()
+    });
+}
+
+function displayImages(images) {
+    $('#gallery').empty(); // Galeriyi temizle
+    images.forEach((image, index) => {
+        let imageElement = `
+            <div class="col-md-4 col-sm-6 mb-3">
+                <div class="card">
+                    <img src="${image.urls.small}" class="card-img-top" alt="${image.description || image.alt_description || 'Unsplash Photo'}" data-toggle="modal" data-target="#imageModal-${index}">
+                    <div class="card-body">
+                        <h5 class="card-title">${(image.description || image.alt_description || 'Unsplash Photo').substring(0, 100)}${image.description && image.description.length > 100 ? '...' : ''}</h5>
+                        <p class="card-text">Fotoğraf: ${image.user.name}</p>
+                        <button type="button" class="btn btn-primary btn-sm like-btn" data-liked="false" data-index="${index}"><i class="fas fa-heart"></i> Beğen</button>
+                        <button type="button" class="btn btn-danger btn-sm dislike-btn" data-disliked="false" data-index="${index}"><i class="fas fa-thumbs-down"></i> Beğenme</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="imageModal-${index}" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel-${index}" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="imageModalLabel-${index}">${image.description || image.alt_description || 'Unsplash Photo'}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body"><img src="${image.urls.regular}" class="img-fluid" alt="${image.description || image.alt_description || 'Unsplash Photo'}"></div>
+                        <div class="modal-footer"><p>Fotoğraf: ${image.user.name}</p></div>
+                    </div>
+                </div>
+            </div>`;
+        $("#gallery").append(imageElement);
+    });
+}
+
+$(document).ready(() => {
     getUnsplashImages();
-    $(".filter-button").click(function() {
-        var value = $(this).attr('data-filter');
-        
-        if(value == "all") {
-            $('.filter').show('1000');
-        } else {
-            $(".filter").hide('3000');
-            $('.filter').filter('.' + value).show('3000');
+
+    $('#searchButton').click(() => {
+        let searchTerm = $('#searchInput').val();
+        searchUnsplashImages(searchTerm);
+    });
+
+    $('#searchInput').keypress((e) => {
+        if (e.which == 13) { // Enter tuşu
+            $('#searchButton').click();
         }
+    });
+
+    $('#categorySelect').change(() => {
+        let selectedCategory = $('#categorySelect').val();
+        searchImagesByCategory(selectedCategory);
+    });
+
+    $(document).on('click', '.like-btn, .dislike-btn', function () {
+        let isLiked = $(this).hasClass('like-btn');
+        $(this).html(`<i class="fas fa-${isLiked ? 'heart' : 'thumbs-down'}"></i> ${isLiked ? 'Beğen' : 'Beğenme'}`);
+        $(this).toggleClass('btn-primary btn-danger');
     });
 });
